@@ -3,6 +3,10 @@
 
 
 # Configuration variables.
+CROSS_COMPILE ?=
+EXTRA_LIBS ?=
+GPP = $(CROSS_COMPILE)g++
+
 COMPILE_FLAGS = -c -std=c++14 -Wall
 DEBUG_FLAGS ?=
 LINK_FLAGS =
@@ -12,7 +16,7 @@ INCLUDES += -Idependencies/json/src/
 INCLUDES += -Idependencies/promclient-cpp/include/
 INCLUDES += -Idependencies/promclient-cpp/features/onion/src
 
-LIBS = -lusb-1.0 -lpthread
+LIBS = -lusb-1.0 -lpthread $(EXTRA_LIBS)
 
 OBJECTS = build/config.o \
 					build/device-repo.o \
@@ -40,13 +44,13 @@ $(ONION): $(PROMCLIENT)
 build/%.o: src/%.cpp
 	mkdir -p build/models/pcsensor
 	mkdir -p build/outputs
-	g++ $(COMPILE_FLAGS) $(DEBUG_FLAGS) $(INCLUDES) $< -o $@
+	$(GPP) $(COMPILE_FLAGS) $(DEBUG_FLAGS) $(INCLUDES) $< -o $@
 
 
 # Link binaries.
 out/thermal: $(OBJECTS) $(PROMCLIENT) $(ONION)
 	mkdir -p out/
-	g++ $(LINK_FLAGS) $(LIBS) -o $@ $^
+	$(GPP) $(LINK_FLAGS) $(LIBS) -o $@ $^
 
 
 # Main targets.
