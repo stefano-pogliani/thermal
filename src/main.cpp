@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
   // Load configuration.
   if (argc != 2) {
     std::cerr << "Usage: thermal CONFIG_PATH" << std::endl;
-    std::cerr << "Thermal version: 0.1.1" << std::endl;
+    std::cerr << "Thermal version: 0.1.2" << std::endl;
     return EXIT_USAGE;
   }
 
