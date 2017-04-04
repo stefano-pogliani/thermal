@@ -1,0 +1,15 @@
+[Unit]
+Description=Digital thermometer metrics service (thermal).
+Documentation=https://github.com/stefano-pogliani/thermal
+Requires=network.target
+
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/thermal /etc/thermal.json
+Group=thermal
+User=thermal
+
+
+[Install]
+WantedBy=multi-user.target

@@ -57,6 +57,7 @@ out/thermal: $(OBJECTS) $(PROMCLIENT) $(ONION)
 build: out/thermal
 
 clean:
+	$(MAKE) -C dependencies/promclient-cpp clean
 	rm -rf build/ out/
 
 debug:
